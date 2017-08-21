@@ -159,7 +159,7 @@ class Query(object):
 		while not allDataCompleted:
 			# Set the limit showed data
 			query.limit(limit)
-			query.add_ascending('people')
+			query.add_descending('people')
 			resultList.extend(query.find())
 			if len(resultList) < limit:
 				allDataCompleted = True
