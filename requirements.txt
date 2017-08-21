@@ -2,3 +2,5 @@ bottle
 bs4
 lxml
 jinja2
+leancloud-sdk
+leancloud
