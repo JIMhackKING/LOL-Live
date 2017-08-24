@@ -211,7 +211,6 @@ class Fetch(object):
 		self.zhanqi()
 		self.huya()
 		self.longzhu()
-		self.cc()
 
 class Query(object):
 	"""Some method for query"""
