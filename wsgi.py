@@ -37,11 +37,13 @@ def main():
 def mobile():
 	page = request.query.page or "1"
 	page = int(page)
+	skip = (page - 1) * 60
+	limit = page * 60
 	query = storage.Query()
 	template = env.get_template("mobile.html")
 
 	try:
-		datas = query.datas[page-1:page]
+		datas = query.datas[skip:limit]
 	except IndexError:
 		return redirect("/")
 
