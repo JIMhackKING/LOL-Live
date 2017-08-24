@@ -143,7 +143,7 @@ class Fetch(object):
 		url = "http://www.huya.com/g/lol"
 		try:
 			response = requests.get(url, headers = self.headers)
-			soup = BeautifulSoup(response.content)
+			soup = BeautifulSoup(response.content, 'lxml')
 			rooms = soup.find("ul", id="js-live-list").find_all("li")
 		except Exception as e:
 			print e
