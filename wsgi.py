@@ -4,6 +4,14 @@ import leancloud
 import storage
 from jinja2 import Environment, FileSystemLoader
 from leancloud import Engine
+import os
+
+# Secret
+ID = os.environ["LEANCLOUD_ID"]
+KEY = os.environ["LEANCLOUD_KEY"]
+
+# Init the leancloud
+leancloud.init(ID, KEY)
 
 loader = FileSystemLoader("./views")
 env = Environment(loader=loader)
@@ -38,6 +46,8 @@ def mobile():
 	template = env.get_template("mobile.html")
 
 	datas = query.datas
+	if not datas:
+		return redirect("/mobile")
 	content = template.render(datas=datas)
 	return content
 

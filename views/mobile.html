@@ -17,6 +17,43 @@
             }
         })();
     </script>
+    <script type="text/javascript">
+		function getQueryString(name) { 
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+			var r = window.location.search.substr(1).match(reg); 
+			if (r != null) return unescape(r[2]); return null; 
+		}
+		window.onload = function(){
+			var prev_page = document.getElementById("prev_page");
+			var next_page = document.getElementById("next_page");
+			//获取url参数的函数
+			var page = getQueryString("page");
+			if(page){
+				next_page.setAttribute("href","?page="+(Number(page)+1));
+				if(page != "1"){
+					prev_page.setAttribute("href","?page="+(Number(page)-1));
+				}
+			}
+			else{
+				next_page.setAttribute("href","?page=2");
+			}
+		}
+	</script>
+	<style type="text/css">
+		.btn {
+			display: inline-block;
+			height: 30px;
+			line-height: 30px;
+			border: 1px solid #ccc;
+			background-color: #fff;
+			padding: 0 10px;
+			margin-right: 50px;
+			color: #333;
+		}
+		.btn:hover {
+			background-color: #eee;
+		}
+	</style>
 </head>
 <body>
 <div class="video-list">
@@ -32,6 +69,10 @@
 		</div>
 	</a>
 	{% endfor %}
+	<p style="text-align: center">
+		<a href="javascript:;" class="btn" id="prev_page">上一页</a>
+		<a href="javascript:;" class="btn" id="next_page">下一页</a>
+	</p>
 </div>
 </body>
 </html>
