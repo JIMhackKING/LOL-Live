@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 import requests
 
 # Secret
-ID = os.environ["LEANCLOUD_ID"] = "m8BCOVzOjD2oa4o5ueVoYq16-gzGzoHsz"
-KEY = os.environ["LEANCLOUD_KEY"] = "WPxGStevqfwNmgqCSEliPNpz"
+ID = os.environ["LEANCLOUD_ID"]
+KEY = os.environ["LEANCLOUD_KEY"]
 
 # Init the leancloud
 leancloud.init(ID, KEY)
@@ -241,5 +241,6 @@ class Query(object):
 		leancloud.Object.destroy_all(self.datas)
 
 if __name__ == '__main__':
-	fetcher = Fetch()
-	fetcher.longzhu()
+	query = Query()
+	datas = query.datas[0:60]
+	print datas
