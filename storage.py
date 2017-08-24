@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 import requests
 
 # Secret
-ID = os.environ["LEANCLOUD_ID"]
-KEY = os.environ["LEANCLOUD_KEY"]
+ID = os.environ["LEANCLOUD_ID"] = "m8BCOVzOjD2oa4o5ueVoYq16-gzGzoHsz"
+KEY = os.environ["LEANCLOUD_KEY"] = "WPxGStevqfwNmgqCSEliPNpz"
 
 # Init the leancloud
 leancloud.init(ID, KEY)
@@ -215,31 +215,24 @@ class Fetch(object):
 
 class Query(object):
 	"""Some method for query"""
-	def __init__(self, page):
-		self.page = int(page)
 
 	@property
 	def datas(self):
 		query = leancloud.Query('Live')
 		allDataCompleted = False
-		batch = self.page - 1
-		limit = 60
-
-		query.limit(limit)
-		query.skip(batch * limit)
-		query.add_descending('people')
-		resultList = query.find()
+		batch = 0
+		limit = 1000
 
 		# get all data
-		# resultList = []  # All data
-		# while not allDataCompleted:
-		# 	# Set the limit showed data
-		# 	query.limit(limit)
-		# 	# reverse arrangement
-		# 	query.add_descending('people')
-		# 	resultList.extend(query.find())
-		# 	if len(resultList) < limit:
-		# 		allDataCompleted = True
+		resultList = []  # All data
+		while not allDataCompleted:
+			# Set the limit showed data
+			query.limit(limit)
+			# reverse arrangement
+			query.add_descending('people')
+			resultList.extend(query.find())
+			if len(resultList) < limit:
+				allDataCompleted = True
 		return resultList
 		
 	def cleanData(self):
@@ -250,4 +243,3 @@ class Query(object):
 if __name__ == '__main__':
 	fetcher = Fetch()
 	fetcher.longzhu()
-	print len(fetcher.lives)
