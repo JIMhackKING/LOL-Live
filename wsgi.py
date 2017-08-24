@@ -4,14 +4,6 @@ import leancloud
 import storage
 from jinja2 import Environment, FileSystemLoader
 from leancloud import Engine
-import os
-
-# Secret
-ID = os.environ["LEANCLOUD_ID"]
-KEY = os.environ["LEANCLOUD_KEY"]
-
-# Init the leancloud
-leancloud.init(ID, KEY)
 
 loader = FileSystemLoader("./views")
 env = Environment(loader=loader)
@@ -29,11 +21,13 @@ def page404(error):
 @route("/")
 def main():
 	page = request.query.page or "1"
-	query = storage.Query(page)
+	page = int(page)
+	query = storage.Query()
 	template = env.get_template("home.html")
 
-	datas = query.datas
-	if not datas:
+	try:
+		datas = query.datas[page-1:page]
+	except IndexError:
 		return redirect("/")
 
 	content = template.render(datas=datas, version='v2.1')
@@ -42,12 +36,15 @@ def main():
 @route('/mobile')
 def mobile():
 	page = request.query.page or "1"
-	query = storage.Query(page)
+	page = int(page)
+	query = storage.Query()
 	template = env.get_template("mobile.html")
 
-	datas = query.datas
-	if not datas:
-		return redirect("/mobile")
+	try:
+		datas = query.datas[page-1:page]
+	except IndexError:
+		return redirect("/")
+
 	content = template.render(datas=datas)
 	return content
 
@@ -63,4 +60,4 @@ def update(**kwargs):
 
 if __name__ == '__main__':
 	from bottle import run
-	run(host="192.168.1.188", debug=True, reloader=True)
+	run()
