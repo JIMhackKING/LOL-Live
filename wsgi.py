@@ -32,6 +32,9 @@ def main():
 		datas = query.datas[skip:limit]
 	except IndexError:
 		return redirect("/")
+	else:
+		if not datas:
+			return redirect("/")
 
 	content = template.render(datas=datas, version=VERSION)
 	return content
@@ -71,3 +74,4 @@ def change_version(version, **kwargs):
 if __name__ == '__main__':
 	from leancloud import cloudfunc
 	cloudfunc.run("change_version", version='v1.1')
+	# cloudfunc.run("update")
