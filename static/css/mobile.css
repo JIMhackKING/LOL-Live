@@ -1,0 +1,44 @@
+.video-list {
+	padding: 0 1rem;
+	overflow: hidden;
+}
+.video {
+	width: 50%;
+	height: auto;
+	float: left;
+	padding-top: 1px;
+	padding: 1rem;
+	height: 395px;
+}
+.video-thumb {
+	border-radius: 4px;
+	padding-bottom: 5.65%;
+	position: relative;
+}
+.screen-shot {
+	width: 100%;
+}
+.people {
+	bottom: 11rem;
+	left: 1rem;
+	position: absolute;
+	z-index: 1;
+	color: #c2c3c4;
+	display: inline-block;
+	background-color: rgba(0,0,0,.38);
+	border-radius: 7px;
+	width: auto;
+	height: 2rem;
+	font-size: .2rem;
+	background-image: url(/img/hot.png);
+	background-repeat: no-repeat;
+	background-size: 1.3rem 1.3rem;
+	background-position: 1px .3em;
+	padding: 0.3rem;
+	padding-left: 1.4rem;
+	box-sizing: border-box;
+}
+.video-foot {
+	font-size: 20px;
+	height: auto;
+}

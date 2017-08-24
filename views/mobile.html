@@ -1,0 +1,37 @@
+<!-- 手机端 -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LOL&nbsp;&ndash;&nbsp;直播聚合</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/pure-min.css">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/mobile.css" rel="stylesheet">
+	<script>
+		//检测当前的客户端是否是手机
+        (function(){
+        	//通过User-Agent检测
+            var MOBILE_UA_REGEXP = /(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone|Prerender|MicroMessenger)/i;
+            if (!MOBILE_UA_REGEXP.test(navigator.userAgent)) {
+                window.location.replace('/');  //跳转
+            }
+        })();
+    </script>
+</head>
+<body>
+<div class="video-list">
+	{% for data in datas %}
+	<a class="video" href="{{ data.get('link') }}">
+		<div class="video-thumb">
+			<img src="{{ data.get('img') }}" class="screen-shot">
+			<div class="people">{{ data.get('people') }}</div>
+		</div>
+		<div class="video-foot">
+			<p style="text-align: center">{{ data.get('name') }}</p>
+			<p style="text-align: center;">{{ data.get('title') }}</p>
+		</div>
+	</a>
+	{% endfor %}
+</div>
+</body>
+</html>

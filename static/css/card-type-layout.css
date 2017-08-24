@@ -1,0 +1,57 @@
+.card {
+	width: 250px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 11px;
+	transition: box-shadow .3s;
+}
+.card:hover {
+	box-shadow: 0 4px 20px 8px rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.49);
+}
+.footer {
+	color: #fff;
+	padding: 10px;
+	font-size: 12px;
+	height: 50px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.body {
+	padding: 0px;
+	overflow: hidden;
+	height: 140px;
+}
+.body p {
+	margin-left: 5px;
+}
+.screen-shot {
+	width: 100%;
+	height: 100%;
+}
+.lives {
+	margin-top: 10px;
+	margin-left: 30px;
+}
+.video-person-icon {
+	background: url("/img/user2.png");
+}
+.people-icon {
+	background: url("/img/hot.png");
+}
+.title-icon {
+	background: url("/img/user.png");
+}
+.video-person-icon, .people-icon, .title-icon {
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
+	float: left;
+	background-color: inherit;
+	margin-right: 2px;
+}
+.video-card {
+	width: 50%;
+	float: left;
+}
