@@ -1,4 +1,5 @@
-from bottle import route, static_file, default_app, error
+from bottle import (route, static_file, default_app, error, request,
+				redirect)
 import leancloud
 import storage
 from jinja2 import Environment, FileSystemLoader
@@ -19,11 +20,25 @@ def page404(error):
 
 @route("/")
 def main():
-	query = storage.Query()
+	page = request.query.page or "1"
+	query = storage.Query(page)
 	template = env.get_template("home.html")
 
 	datas = query.datas
-	content = template.render(datas = datas)
+	if not datas:
+		return redirect("/")
+
+	content = template.render(datas=datas, version='v2.1')
+	return content
+
+@route('/mobile')
+def mobile():
+	page = request.query.page or "1"
+	query = storage.Query(page)
+	template = env.get_template("mobile.html")
+
+	datas = query.datas
+	content = template.render(datas=datas)
 	return content
 
 application = Engine(default_app())
@@ -35,3 +50,7 @@ def update(**kwargs):
 	query.cleanData()
 	fetcher.fetch_all()
 	storage.Fetch.Live.save_all(fetcher.lives)
+
+if __name__ == '__main__':
+	from bottle import run
+	run(host="192.168.1.188", debug=True, reloader=True)

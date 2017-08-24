@@ -1,108 +1,108 @@
-<!-- 新思路：将页面设置成卡片式（类似全民直播），添加主播和观众人数图标，并设置分页 -->
 <!DOCTYPE html>
 <html>
 <head>
 	<title>LOL&nbsp;&ndash;&nbsp;直播聚合</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/css/pure-min.css">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	{% if version=='v1.1' %}<link href="/css/v1.1.css" rel="stylesheet">{% endif %}
+	{% if version=='v2.1' %}<link href="/css/card-type-layout.css" rel="stylesheet">{% endif %}
+	<script>
+		//检测当前的客户端是否是手机
+        (function(){
+        	//通过User-Agent检测
+            var MOBILE_UA_REGEXP = /(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone|Prerender|MicroMessenger)/i;
+            if (MOBILE_UA_REGEXP.test(navigator.userAgent)) {
+                window.location.replace('/mobile');  //跳转
+            }
+        })();
+    </script>
 	<style type="text/css">
 		body {
 			font-family: "helvetica neue",arial,sans-serif;
 			font-size: 28px;
 			background-color: #edece9;
 		}
-		.chairman-wrapper {
-			text-decoration: none;
-		}
-		.chairman {
-			color: #444;
-			margin: 5px;
-			background-color: #fff;
-			box-shadow: 0 1px 3px rgba(0,0,0,.3);
-		}
-		.chairman:hover {
-			box-shadow: 4px 4px 5px rgba(0,128,128,.3);
-		}
-		.chairman-img {
-		}
-		.name {
-			overflow: hidden;
-			padding: 5px;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			width: 100%;
+		.btn {
 			display: inline-block;
-		}
-		.title {
-			overflow: hidden;
-			padding: 5px;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			width: 100%;
-			display: inline-block;
-		}
-		.num {
-			padding: 5px;
-		}
-		.type {
-			margin-top:10px;
-		}
-		.douyu {
-			background-image: url('/img/douyu.png');
-			width: 87px;
-			height: 35px;
-			float:left;
-		}
-		.cc {
-			background-image: url('/img/cc.png');
-			width: 155px;
-			height: 50px;
-			float:left;
-		}
-		.huomao {
-			background-image: url('/img/huomao.png');
-			width: 110px;
-			height: 40px;
-			float:left;
-		}
-		.longzhu {
-			background-image: url('/img/longzhu.jpg');
-			width: 121px;
-			height: 74px;
-			float:left;
-		}
-		.quanmin {
-			background-image: url('/img/quanmin.png');
-			width: 116px;
 			height: 30px;
-			float:left;
+			line-height: 30px;
+			border: 1px solid #ccc;
+			background-color: #fff;
+			padding: 0 10px;
+			margin-right: 50px;
+			color: #333;
 		}
-		.panda {
-			background-image: url('/img/xiongmao.png');
-			width: 160px;
-			height: 92px;
-			float:left;
-		}
-		.zhanqi {
-			background-image: url('/img/zhanqi.jpg');
-			width: 121px;
-			height: 75px;
-			float:left;
-		}
-		.huya {
-			background-image: url('/img/huya.png');
-			width: 240px;
-			height: 72px;
-			float:left;
+		.btn:hover {
+			background-color: #eee;
 		}
 	</style>
+	{% if version=='v2.1' %}
+	<script type="text/javascript">
+		function getQueryString(name) { 
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+			var r = window.location.search.substr(1).match(reg); 
+			if (r != null) return unescape(r[2]); return null; 
+		}
+		window.onload = function(){
+			var prev_page = document.getElementById("prev_page");
+			var next_page = document.getElementById("next_page");
+			//获取url参数的函数
+			var page = getQueryString("page");
+			if(page){
+				next_page.setAttribute("href","?page="+(Number(page)+1));
+				if(page != "1"){
+					prev_page.setAttribute("href","?page="+(Number(page)-1));
+				}
+			}
+			else{
+				next_page.setAttribute("href","?page=2");
+			}
+		}
+	</script>
+	{% endif %}
 </head>
 <body>
+{% if version=='v2.1' %}
+<div class="lives" id="lives">
 	{% for data in datas %}
-		<a href="{{ data.get('link') }}" class="chairman-wrapper">
-			<div class="pure-g chairman">
+	<a title="{{ data.get('title') }}" href="{{ data.get('link') }}">
+	<div class="card">
+		<div class="body">
+			<img src="{{ data.get('img') }}" class="screen-shot">
+		</div>
+	<div class="footer" style="background-color: #4caf50;">
+		<span style="color:	#FAEBD7">
+		<i class="title-icon"></i>
+			{{ data.get('title') }}
+		</span>
+		<br>
+		<span style="float: left;">
+		<i class="video-person-icon"></i>
+			{{ data.get('name') }}
+		</span>
+		<span style="float: right;">
+			<i class="people-icon"></i>
+			{{ data.get('people') }}人
+		</span>
+	</div>
+	</div>
+	</a>
+	{% endfor %}
+	<p style="text-align: center">
+		<a href="javascript:;" class="btn" id="prev_page">上一页</a>
+		<a href="javascript:;" class="btn" id="next_page">下一页</a>
+	</p>
+</div>
+{% endif %}
+
+{% if version== 'v1.1' %}
+	 <!-- 旧版流式布局 -->
+	{% for data in datas %}
+		<a href="{{ data.get('link') }}" class="live-wrapper" target="_blank">
+			<div class="pure-g live">
 				<div class="pure-u-1-5">
-					<img class="pure-img chairman-img" src="{{ data.get('img') }}">
+					<img class="pure-img live-img" src="{{ data.get('img') }}">
 				</div>
 				<div class="pure-u-2-5">
 					<div class="name">{{ data.get('name') }}</div>
@@ -117,6 +117,6 @@
 			</div>
 		</a>
 	{% endfor %}
-</div>
+{% endif %}
 </body>
 </html>
