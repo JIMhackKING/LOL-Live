@@ -173,4 +173,4 @@ leancloud 规定在项目根目录下必须有 `wsgi.py` 与 `requirements.txt` 
 
 当前项目的最大缺陷是网页前端的展现做的不尽人意，其中还有一个适应手机端的网页，因做的太难看最终放弃了，代码仍在项目中，我本人诚恳地邀请各位开发者能够对项目优化做出贡献，提出问题或者改进的方案和方法。
 
-如果大家发现项目有 BUG ，欢迎提交 issues 到 [https://github.com/JIMhackKING/LOL-Live/issues](https://github.com/JIMhackKING/LOL-Live/issues)，如果你能提出改进的方案或者对项目进行了优化，我将不胜感激，如果你有新的想法并对代码进行了改进，欢迎 Pull request。
+如果大家发现项目有 BUG ，欢迎提交 issues 到 [https://github.com/JIMhackKING/LOL-Live/issues](https://github.com/JIMhackKING/LOL-Live/issues)，如果你能提出改进的方案或者对项目进行了优化，我将不胜感激，如果你有新的想法并对代码进行了改进，欢迎 Pull request，你将成为贡献者之一。
