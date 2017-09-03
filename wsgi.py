@@ -64,7 +64,7 @@ def update(**kwargs):
 	query = storage.Query()
 	query.cleanData()
 	fetcher.fetch_all()
-	storage.Fetch.Live.save_all(fetcher.lives)
+	storage.Fetch.Live.save_all(fetcher.lives[120])
 
 @application.define
 def change_version(version, **kwargs):
@@ -73,5 +73,5 @@ def change_version(version, **kwargs):
 
 if __name__ == '__main__':
 	from leancloud import cloudfunc
-	cloudfunc.run("change_version", version='v1.1')
+	cloudfunc.run("change_version", version='v2.1')
 	# cloudfunc.run("update")
