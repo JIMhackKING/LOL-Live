@@ -64,7 +64,7 @@ def update(**kwargs):
 	query = storage.Query()
 	query.cleanData()
 	fetcher.fetch_all()
-	storage.Fetch.Live.save_all(fetcher.lives[120])
+	storage.Fetch.Live.save_all(fetcher.lives[:120])
 
 @application.define
 def change_version(version, **kwargs):
