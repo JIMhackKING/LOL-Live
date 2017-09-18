@@ -214,12 +214,30 @@ class Fetch(object):
 
 	def fetch_all(self):
 		"""Fetch all Live rooms"""
-		self.douyu()
-		self.xiongmao()
-		self.quanmin()
-		self.zhanqi()
-		self.huya()
-		self.longzhu()
+		try:
+			self.douyu()
+		except:
+			pass
+		try:
+			self.xiongmao()
+		except:
+			pass
+		try:
+			self.quanmin()
+		except:
+			pass
+		try:
+			self.zhanqi()
+		except:
+			pass
+		try:
+			self.huya()
+		except:
+			pass
+		try:
+			self.longzhu()
+		except:
+			pass
 
 class Query(object):
 	"""Some method for query"""
