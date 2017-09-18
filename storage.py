@@ -21,6 +21,7 @@ class Fetch(object):
 		self.headers = {"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) "
 						"AppleWebKit/537.36 (KHTML, like Gecko) "
 						"Chrome/59.0.3071.115 Safari/537.36"}
+		self.maximum = 20
 
 		self.douyu_url = 'http://www.douyu.com'
 		self.xiongmao_url = 'http://www.panda.tv'
@@ -38,7 +39,9 @@ class Fetch(object):
 		except Exception as e:
 			print e
 
-		for room in rooms:
+		for index, room in enumerate(rooms):
+			if index == self.maximum:
+				break
 			name = room.find("span", {"class":"dy-name ellipsis fl"}).string.strip()
 			people = room.find("span", {"class":"dy-num fr"}).string.strip()
 			title = room.find("h3", {"class":"ellipsis"}).text.strip()
@@ -68,7 +71,9 @@ class Fetch(object):
 		except Exception as e:
 			print e
 
-		for room in rooms:
+		for index, room in enumerate(rooms):
+			if index == self.maximum:
+				break
 			name = room.find("span", {"class":"video-nickname"}).text.strip()
 			people = room.find("span", {"class":"video-number"}).string.strip()
 			title = room.find("span", {"class":"video-title"})["title"]
@@ -97,7 +102,9 @@ class Fetch(object):
 		except Exception as e:
 			print e
 
-		for room in rooms:
+		for index, room in enumerate(rooms):
+			if index == self.maximum:
+				break
 			name = room["nick"]
 			people = room["view"]
 			title = room["title"]
@@ -116,7 +123,7 @@ class Fetch(object):
 			self.lives.append(live)
 
 	def zhanqi(self):
-		for i in range(1,5):
+		for i in (1,):
 			url = "http://www.zhanqi.tv/api/static/v2.1/game/live/6/30/%d.json" %i
 			response = requests.get(url, headers=self.headers).json()
 			rooms = response["data"]["rooms"]
@@ -148,7 +155,9 @@ class Fetch(object):
 		except Exception as e:
 			print e
 
-		for room in rooms:
+		for index, room in enumerate(rooms):
+			if index = self.maximum:
+				break
 			name = room.find("i", {"class":"nick"}).string.strip()
 			people = room.find("i", {"class":"js-num"}).string.strip()
 			title = room.find("a", {"class":"title"}).string.strip()
@@ -172,7 +181,7 @@ class Fetch(object):
 	def longzhu(self):
 		url = "http://api.plu.cn/tga/streams"
 		rooms = []
-		for i in range(7):
+		for i in (0,):
 			params = {"max-results": "18",
 					"start-index": i * 18,
 					"sort-by": "top",
