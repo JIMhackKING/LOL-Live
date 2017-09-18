@@ -156,7 +156,7 @@ class Fetch(object):
 			print e
 
 		for index, room in enumerate(rooms):
-			if index = self.maximum:
+			if index == self.maximum:
 				break
 			name = room.find("i", {"class":"nick"}).string.strip()
 			people = room.find("i", {"class":"js-num"}).string.strip()
