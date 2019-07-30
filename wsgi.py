@@ -7,7 +7,7 @@ from leancloud import Engine
 
 loader = FileSystemLoader("./views")
 env = Environment(loader=loader)
-VERSION = 'v1.1'
+VERSION = 'v2.1'
 
 @route("/<filepath:path>")
 def assets(filepath):
