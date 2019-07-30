@@ -31,21 +31,22 @@ class Fetch(object):
 		self.longzhu_url = "http://longzhu.com"
 
 	def douyu(self):
-		url = "https://www.douyu.com/directory/game/LOL"
+		url = "https://www.douyu.com/g_LOL"
 		try:
 			response = requests.get(url, headers=self.headers)
 			soup = BeautifulSoup(response.content, "lxml")
-			rooms = soup.find("ul", id="live-list-contentbox").find_all("li")
+			section_all = soup.find("section", id="listAll")
+			rooms = section_all.find("ul", {"class": "layout-Cover-list"}).find_all("li", {"class": "layout-Cover-item"})
 		except Exception as e:
 			print e
 
 		for index, room in enumerate(rooms):
 			if index == self.maximum:
 				break
-			name = room.find("span", {"class":"dy-name ellipsis fl"}).string.strip()
-			people = room.find("span", {"class":"dy-num fr"}).string.strip()
-			title = room.find("h3", {"class":"ellipsis"}).text.strip()
-			img = room.find("img")["data-original"]
+			name = room.find("span", {"h2":"DyListCover-user"}).string.strip()
+			people = room.find("span", {"class":"DyListCover-hot"}).string.strip()
+			title = room.find("h3", {"class":"DyListCover-intro"}).text.strip()
+			img = room.find("img")["src"]
 			link = room.find("a")["href"]
 
 			# trans people to num
